@@ -6,13 +6,14 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Set;
+import application.record.QuestaoDTO;
+import application.record.QuestaoInsertDTO;
+
 import java.util.HashSet;
 import java.util.stream.Collectors;
 
@@ -29,18 +30,16 @@ public class Questao {
 
     @ManyToOne
     @JoinColumn(name = "id_categoria", nullable = false)
-    private Categoria categoria;
+    private HashSet<Categoria> categoria;
 
     public Questao(QuestaoDTO record) {
         this.id = record.id();
         this.enunciado = record.enunciado();
-        this.categoria = new Categoria(record.categorias());
+        this.categoria = record.categorias().stream().map(Categoria::new).collect(Collectors.toCollection(HashSet::new));
     }
 
     public Questao(QuestaoInsertDTO record) {
         this.enunciado = record.enunciado();
-        Categoria cat = new Categoria();
-        cat.setId(record.id_categoria());
-        this.categoria = cat;
+        this.categoria = record.categorias().stream().map(Categoria::new).collect(Collectors.toCollection(HashSet::new));
     }
 }

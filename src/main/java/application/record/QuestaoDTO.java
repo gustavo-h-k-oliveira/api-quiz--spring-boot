@@ -14,7 +14,6 @@ public record QuestaoDTO (
         this(
             questoes.getId(),
             questoes.getEnunciado(),
-            new CategoriaDTO(questoes.getCategoria()),
             questoes.getCategoria()
                 .stream()
                 .map(CategoriaDTO::new)
