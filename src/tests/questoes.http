@@ -1,0 +1,25 @@
+@url = "https://8080-gustavohkol-apiquizspri-ji5p0nwsxn9.ws-us118.gitpod.io"
+
+GET {{url}}/questoes
+
+###
+
+POST {{url}}/questoes
+Content-Type: application/json
+
+{
+    "enunciado" : "Qual é a composição da água?",
+    "categorias" : [{"id" : 1}]
+}
+
+###
+PUT {{url}}/questoes/1
+Content-Type: application/json
+
+{
+    "enunciado" : "O que são camadas eletrônicas?",
+    "categorias" : [{"id" : 1}]
+}
+
+###
+DELETE {{url}}/livros/5

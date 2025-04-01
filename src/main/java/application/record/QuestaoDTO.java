@@ -1,23 +1,17 @@
 package application.record;
 
 import application.model.Questao;
-import java.util.HashSet;
-
-import java.util.stream.Collectors;
 
 public record QuestaoDTO (
     long id,
     String enunciado,
-    HashSet<CategoriaDTO> categorias
+    CategoriaDTO categorias
 ) {
     public QuestaoDTO(Questao questoes) {
         this(
             questoes.getId(),
             questoes.getEnunciado(),
-            questoes.getCategoria()
-                .stream()
-                .map(CategoriaDTO::new)
-                .collect(Collectors.toCollection(HashSet::new))
+            new CategoriaDTO(questoes.getCategoria())
         );
     }
 }

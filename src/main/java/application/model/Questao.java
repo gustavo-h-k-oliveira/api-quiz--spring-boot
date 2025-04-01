@@ -14,8 +14,6 @@ import lombok.Setter;
 import application.record.QuestaoDTO;
 import application.record.QuestaoInsertDTO;
 
-import java.util.HashSet;
-import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "questões")
@@ -30,16 +28,16 @@ public class Questao {
 
     @ManyToOne
     @JoinColumn(name = "id_categoria", nullable = false)
-    private HashSet<Categoria> categoria;
+    private Categoria categoria;
 
     public Questao(QuestaoDTO record) {
         this.id = record.id();
         this.enunciado = record.enunciado();
-        this.categoria = record.categorias().stream().map(Categoria::new).collect(Collectors.toCollection(HashSet::new));
+        this.categoria = new Categoria(record.categorias());
     }
 
     public Questao(QuestaoInsertDTO record) {
         this.enunciado = record.enunciado();
-        this.categoria = record.categorias().stream().map(Categoria::new).collect(Collectors.toCollection(HashSet::new));
+        this.categoria = new Categoria(record.categorias());
     }
 }

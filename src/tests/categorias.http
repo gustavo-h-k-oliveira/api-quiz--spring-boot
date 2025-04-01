@@ -1,0 +1,12 @@
+@url = "https://8080-gustavohkol-apiquizspri-ji5p0nwsxn9.ws-us118.gitpod.io"
+
+GET {{url}}/categorias
+
+###
+
+POST {{url}}/categorias
+Content-Type: application/json
+
+{
+    "nome" : "Química"
+}
